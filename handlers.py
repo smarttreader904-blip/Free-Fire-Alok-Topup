@@ -40,7 +40,8 @@ from keyboards import (
     buy_offer_kb,
     order_admin_kb,
     price_admin_kb,
-    price_change_kb
+    price_change_kb,
+    deposit_admin_kb
 )
 
 router = Router()
