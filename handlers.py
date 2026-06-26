@@ -56,8 +56,8 @@ router = Router()
 
 class DepositState(StatesGroup):
     waiting_sender_info = State()
+    waiting_amount = State()
     waiting_trx_id = State()
-
 
 class BuyState(StatesGroup):
     waiting_game_name = State()
