@@ -160,7 +160,7 @@ def get_balance(user_id):
 # ==========================================
 
 def update_balance(user_id, amount):
-    conn = sqlite3.connect("database.db")
+    conn = connect()
     cur = conn.cursor()
 
     cur.execute(
