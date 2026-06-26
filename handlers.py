@@ -302,8 +302,8 @@ async def trx_handler(
     )
 
     await message.bot.send_message(
-        ADMIN_ID,
-        f"""
+    ADMIN_ID,
+    f"""
 💰 New Deposit Request
 
 Deposit ID: {deposit_id}
@@ -314,8 +314,9 @@ Deposit ID: {deposit_id}
 💳 Method: {method.upper()}
 📱 Sender Last 3 Digit: {sender}
 🧾 TRX ID: {trx_id}
-"""
-    )
+""",
+    reply_markup=deposit_admin_kb(deposit_id)
+)
 
     await state.clear()
 # ==========================================
