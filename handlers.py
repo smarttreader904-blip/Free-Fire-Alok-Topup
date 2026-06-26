@@ -222,7 +222,7 @@ async def add_balance_menu(
     )
 
 
-@router.message(F.text == "🎁 অফার")
+@router.message(F.text == "🎁 ডায়মন্ড")
 async def offer_menu(
         message: Message):
 
