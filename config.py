@@ -22,7 +22,7 @@ BINANCE_ID = "123456789"
 # BONUS SYSTEM
 # =========================
 
-BONUS_AMOUNT = 0.30
+BONUS_AMOUNT = 1
 BONUS_COOLDOWN = 86400  # 24 Hours (seconds)
 
 # =========================
