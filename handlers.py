@@ -92,18 +92,28 @@ async def start_cmd(message: Message):
 
     add_user(message.from_user.id)
 
-    await message.answer(
-        f"""
-👋 Welcome {message.from_user.first_name}
+    args = message.text.split()
 
-🔥 Welcome To Topup Bot
+    if len(args) > 1:
 
-নিচের অপশন থেকে একটি সিলেক্ট করুন।
-""",
-        reply_markup=start_kb
-    )
+        referrer_id = int(args[1])
 
+        if (
+            referrer_id != message.from_user.id
+        ):
 
+            update_balance(
+                referrer_id,
+                REFERRAL_BONUS
+            )
+
+            try:
+                await message.bot.send_message(
+                    referrer_id,
+                    f"🎉 আপনি একজন User Refer করেছেন।\n\n💰 {REFERRAL_BONUS} Tk Balance এ যোগ হয়েছে।"
+                )
+            except:
+                pass
 # ==========================================
 # BALANCE
 # ==========================================
@@ -1250,7 +1260,28 @@ async def unknown_message(
 """,
         reply_markup=start_kb
             )
+# ==========================================
+# REFER SYSTEM
+# ==========================================
 
+@router.message(F.text == "👥 Refer")
+async def refer_cmd(message: Message):
+
+    bot_info = await message.bot.get_me()
+
+    link = f"https://t.me/{bot_info.username}?start={message.from_user.id}"
+
+    await message.answer(
+        f"""
+👥 Refer & Earn
+
+🔗 আপনার Referral Link:
+
+{link}
+
+🎁 প্রতি Refer এ {REFERRAL_BONUS} Tk পাবেন।
+"""
+    )
 # ==========================================
 # UNKNOWN TEXT HANDLER
 # ==========================================
