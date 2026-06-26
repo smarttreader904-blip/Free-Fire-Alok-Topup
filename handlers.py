@@ -212,7 +212,7 @@ async def bonus_cmd(message: Message):
 # MAIN MENU BUTTONS
 # ==========================================
 
-@router.message(F.text == "➕ Add Balance")
+@router.message(F.text == "➕ ব্যালেন্স যোগ করুন")
 async def add_balance_menu(
         message: Message):
 
