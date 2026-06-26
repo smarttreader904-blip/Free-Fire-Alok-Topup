@@ -227,7 +227,7 @@ def get_last_bonus(user_id):
 # ==========================================
 
 def set_last_bonus(user_id, timestamp):
-    conn = sqlite3.connect("database.db")
+    conn = connect()
     cur = conn.cursor()
 
     cur.execute(
