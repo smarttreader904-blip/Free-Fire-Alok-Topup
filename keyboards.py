@@ -14,7 +14,7 @@ from aiogram.types import (
 start_kb = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="➕ Add Balance"),
+            KeyboardButton(text=""টাকা এড করুন),
             KeyboardButton(text="🎁 Offer")
         ],
         [
