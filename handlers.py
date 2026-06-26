@@ -341,8 +341,9 @@ Deposit ID: {deposit_id}
 👤 User: {message.from_user.full_name}
 🆔 User ID: {message.from_user.id}
 
-💳 Method: {method.upper()}
+💳 Method💳 Method: {method.upper()}
 📱 Sender Last 3 Digit: {sender}
+💰 Deposit Amount: {amount} Tk
 🧾 TRX ID: {trx_id}
 """,
     reply_markup=deposit_admin_kb(deposit_id)
