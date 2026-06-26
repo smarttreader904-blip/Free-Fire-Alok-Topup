@@ -92,28 +92,16 @@ async def start_cmd(message: Message):
 
     add_user(message.from_user.id)
 
-    args = message.text.split()
+    await message.answer(
+        f"""
+👋 Welcome {message.from_user.first_name}
 
-    if len(args) > 1:
+🔥 Welcome To Topup Bot
 
-        referrer_id = int(args[1])
-
-        if (
-            referrer_id != message.from_user.id
-        ):
-
-            update_balance(
-                referrer_id,
-                REFERRAL_BONUS
-            )
-
-            try:
-                await message.bot.send_message(
-                    referrer_id,
-                    f"🎉 আপনি একজন User Refer করেছেন।\n\n💰 {REFERRAL_BONUS} Tk Balance এ যোগ হয়েছে।"
-                )
-            except:
-                pass
+নিচের অপশন থেকে একটি সিলেক্ট করুন।
+""",
+        reply_markup=start_kb
+    )
 # ==========================================
 # BALANCE
 # ==========================================
