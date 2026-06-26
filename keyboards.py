@@ -14,20 +14,19 @@ from aiogram.types import (
 start_kb = ReplyKeyboardMarkup(
     keyboard=[
         [
-            KeyboardButton(text="➕ Add Balance"),
-            KeyboardButton(text="🎁 Offer")
+            KeyboardButton(text="➕ ব্যালেন্স যোগ করুন"),
+            KeyboardButton(text="🎁 ডায়মন্ড")
         ],
         [
-            KeyboardButton(text="👥 Refer")
+            KeyboardButton(text="👥 রেফার")
         ],
         [
-            KeyboardButton(text="🎉 Bonus"),
-            KeyboardButton(text="💰 Balance")
+            KeyboardButton(text="🎉 বোনাস"),
+            KeyboardButton(text="💰 ব্যালেন্স")
         ]
     ],
     resize_keyboard=True
 )
-
 # =========================
 # PAYMENT METHODS
 # =========================
