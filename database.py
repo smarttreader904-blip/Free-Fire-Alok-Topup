@@ -89,19 +89,30 @@ def init_db():
     """)
 
     # PRICES TABLE
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS prices (
+cur.execute("""
+CREATE TABLE IF NOT EXISTS prices (
 
-        offer TEXT PRIMARY KEY,
+    offer TEXT PRIMARY KEY,
 
-        price REAL
+    price REAL
 
-    )
-    """)
+)
+""")
 
-    conn.commit()
+# REFERRALS TABLE
+cur.execute("""
+CREATE TABLE IF NOT EXISTS referrals (
 
-    conn.close()
+    user_id INTEGER PRIMARY KEY,
+
+    referrer_id INTEGER
+
+)
+""")
+
+conn.commit()
+
+conn.close()
     # ==========================================
 # USER FUNCTIONS
 # ==========================================
@@ -505,4 +516,40 @@ def get_all_users():
 
     conn.close()
 
-    return [row[0] for row in rows]
+    return [row[0] for row in rows]# ==========================================
+# REFERRAL FUNCTIONS
+# ==========================================
+
+def has_referred(user_id):
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        "SELECT * FROM referrals WHERE user_id=?",
+        (user_id,)
+    )
+
+    data = cur.fetchone()
+
+    conn.close()
+
+    return data is not None
+
+
+def save_referral(user_id, referrer_id):
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        INSERT INTO referrals
+        (user_id, referrer_id)
+        VALUES (?, ?)
+        """,
+        (user_id, referrer_id)
+    )
+
+    conn.commit()
+    conn.close()
