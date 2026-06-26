@@ -1196,6 +1196,61 @@ async def help_command(
 
 
 # ==========================================
+# BACK TO OFFER MENU
+# ==========================================
+
+@router.callback_query(F.data == "back_offer_menu")
+async def back_offer_menu(callback: CallbackQuery):
+
+    await callback.message.edit_text(
+        "🛒 নিচের Offer থেকে একটি নির্বাচন করুন:",
+        reply_markup=offer_kb
+    )
+
+    await callback.answer()
+
+
+# ==========================================
+# MAIN MENU CALLBACK
+# ==========================================
+
+@router.callback_query(F.data == "main_menu")
+async def main_menu_callback(callback: CallbackQuery):
+
+    await callback.message.delete()
+
+    await callback.message.answer(
+        """
+👋 Welcome
+
+🔥 Welcome To Topup Bot
+
+নিচের অপশন থেকে একটি সিলেক্ট করুন।
+""",
+        reply_markup=start_kb
+    )
+
+    await callback.answer()
+
+
+# ==========================================
+# UNKNOWN TEXT HANDLER
+# ==========================================
+
+@router.message()
+async def unknown_message(
+        message: Message):
+
+    await message.answer(
+        """
+❌ এই অপশনটি সঠিক নয়।
+
+দয়া করে /start চাপুন অথবা মেনু থেকে একটি অপশন নির্বাচন করুন।
+""",
+        reply_markup=start_kb
+            )
+
+# ==========================================
 # UNKNOWN TEXT HANDLER
 # ==========================================
 
