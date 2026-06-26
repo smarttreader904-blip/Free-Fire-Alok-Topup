@@ -298,6 +298,30 @@ async def sender_info_handler(
 
 
 # ==========================================
+# RECEIVE DEPOSIT AMOUNT
+# ==========================================
+
+@router.message(
+    DepositState.waiting_amount
+)
+async def deposit_amount_handler(
+        message: Message,
+        state: FSMContext):
+
+    await state.update_data(
+        deposit_amount=message.text
+    )
+
+    await message.answer(
+        "🧾 এখন Transaction ID পাঠান:"
+    )
+
+    await state.set_state(
+        DepositState.waiting_trx_id
+    )
+
+
+# ==========================================
 # RECEIVE TRX ID
 # ==========================================
 
@@ -312,6 +336,7 @@ async def trx_handler(
 
     method = data["method"]
     sender = data["sender_info"]
+    amount = data["deposit_amount"]
     trx_id = message.text
 
     deposit_id = add_deposit(
@@ -332,8 +357,8 @@ async def trx_handler(
     )
 
     await message.bot.send_message(
-    ADMIN_ID,
-    f"""
+        ADMIN_ID,
+        f"""
 💰 New Deposit Request
 
 Deposit ID: {deposit_id}
@@ -341,13 +366,13 @@ Deposit ID: {deposit_id}
 👤 User: {message.from_user.full_name}
 🆔 User ID: {message.from_user.id}
 
-💳 Method💳 Method: {method.upper()}
+💳 Method: {method.upper()}
 📱 Sender Last 3 Digit: {sender}
 💰 Deposit Amount: {amount} Tk
 🧾 TRX ID: {trx_id}
 """,
-    reply_markup=deposit_admin_kb(deposit_id)
-)
+        reply_markup=deposit_admin_kb(deposit_id)
+    )
 
     await state.clear()
 # ==========================================
