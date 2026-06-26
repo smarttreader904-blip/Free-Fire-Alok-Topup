@@ -18,6 +18,9 @@ start_kb = ReplyKeyboardMarkup(
             KeyboardButton(text="🎁 Offer")
         ],
         [
+            KeyboardButton(text="👥 Refer")
+        ],
+        [
             KeyboardButton(text="🎉 Bonus"),
             KeyboardButton(text="💰 Balance")
         ]
