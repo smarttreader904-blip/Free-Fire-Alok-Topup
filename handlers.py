@@ -1180,7 +1180,28 @@ async def cancel_process(
         reply_markup=start_kb
     )
 
+# ==========================================
+# REFER SYSTEM
+# ==========================================
 
+@router.message(F.text == "👥 Refer")
+async def refer_cmd(message: Message):
+
+    bot_info = await message.bot.get_me()
+
+    link = f"https://t.me/{bot_info.username}?start={message.from_user.id}"
+
+    await message.answer(
+        f"""
+👥 Refer & Earn
+
+🔗 আপনার Referral Link:
+
+{link}
+
+🎁 প্রতি Refer এ {REFERRAL_BONUS} Tk পাবেন।
+"""
+    )
 # ==========================================
 # HELP COMMAND
 # ==========================================
@@ -1260,28 +1281,7 @@ async def unknown_message(
 """,
         reply_markup=start_kb
             )
-# ==========================================
-# REFER SYSTEM
-# ==========================================
 
-@router.message(F.text == "👥 Refer")
-async def refer_cmd(message: Message):
-
-    bot_info = await message.bot.get_me()
-
-    link = f"https://t.me/{bot_info.username}?start={message.from_user.id}"
-
-    await message.answer(
-        f"""
-👥 Refer & Earn
-
-🔗 আপনার Referral Link:
-
-{link}
-
-🎁 প্রতি Refer এ {REFERRAL_BONUS} Tk পাবেন।
-"""
-    )
 # ==========================================
 # UNKNOWN TEXT HANDLER
 # ==========================================
