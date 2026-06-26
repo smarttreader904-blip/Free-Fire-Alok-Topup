@@ -24,7 +24,7 @@ BINANCE_ID = "123456789"
 
 BONUS_AMOUNT = 1
 BONUS_COOLDOWN = 86400  # 24 Hours (seconds)
-
+REFERRAL_BONUS = 5
 # =========================
 # DEFAULT DIAMOND PRICES
 # =========================
