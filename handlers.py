@@ -159,7 +159,7 @@ Balance: {balance} Tk
 # ==========================================
 
 @router.message(Command("bonus"))
-@router.message(F.text == "🎉 Bonus")
+@router.message(F.text == "🎉 বোনাস")
 async def bonus_cmd(message: Message):
 
     user_id = message.from_user.id
