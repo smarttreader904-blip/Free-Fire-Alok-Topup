@@ -116,7 +116,7 @@ async def balance_cmd(message: Message):
 
     await message.answer(
         f"""
-💰 Your Balance
+💰 আপনার সর্বমোট টাকা 
 
 Balance: {balance} Tk
 """
@@ -128,7 +128,7 @@ Balance: {balance} Tk
 # ==========================================
 
 @router.message(Command("bonus"))
-@router.message(F.text == "🎉 Bonus")
+@router.message(F.text == "🎉বনাস নিন")
 async def bonus_cmd(message: Message):
 
     user_id = message.from_user.id
@@ -191,12 +191,12 @@ async def add_balance_menu(
     )
 
 
-@router.message(F.text == "🎁 Offer")
+@router.message(F.text == "ডায়মন্ড আফার")
 async def offer_menu(
         message: Message):
 
     await message.answer(
-        "🛒 নিচের Offer থেকে একটি নির্বাচন করুন:",
+        "🛒 নিচের অফার থেকে একটি নির্বাচন করুন:",
         reply_markup=offer_kb
 )
 # ==========================================
@@ -296,7 +296,7 @@ async def trx_handler(
 
 ⏳ দয়া করে ১ থেকে ৫ মিনিট অপেক্ষা করুন।
 
-এডমিন আপনার Balance Add করে দিবে।
+এডমিন আপনার টাকা Add করে দিবে।
 """
     )
 
@@ -336,9 +336,9 @@ async def show_offer(
         f"""
 🛒 Offer Details
 
-🎁 Offer: {offer}
+🎁 অফার: {offer}
 
-💰 Price: {price} Tk
+💰 দাম: {price} Tk
 
 নিচের বাটনে ক্লিক করে Buy করুন।
 """,
@@ -384,7 +384,7 @@ async def buy_offer(
     )
 
     await callback.message.edit_text(
-        "🎮 আপনার Game Name লিখুন:"
+        "🎮 আপনার Game আইডি নাম লিখুন:"
     )
 
     await state.set_state(
@@ -434,7 +434,7 @@ async def uid_handler(
     )
 
     await message.answer(
-        "⭐ আপনার Level কত লিখুন:"
+        "⭐ আপনার Level কত তা লিখুন:"
     )
 
     await state.set_state(
@@ -481,8 +481,8 @@ async def level_handler(
         f"""
 ✅ Order Submitted Successfully
 
-🎁 Offer: {offer}
-💰 Price: {price} Tk
+🎁 অফার: {offer}
+💰 price} Tk
 
 ⏳ দয়া করে অপেক্ষা করুন।
 এডমিন খুব দ্রুত আপনার Order Complete করবে।
