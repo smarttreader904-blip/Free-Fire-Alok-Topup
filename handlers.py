@@ -138,7 +138,7 @@ async def start_cmd(message: Message):
 # ==========================================
 
 @router.message(Command("balance"))
-@router.message(F.text == "💰 Balance")
+@router.message(F.text == "💰 ব্যালেন্স")
 async def balance_cmd(message: Message):
 
     balance = get_balance(
