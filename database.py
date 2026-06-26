@@ -205,7 +205,7 @@ def deduct_balance(
 # ==========================================
 
 def get_last_bonus(user_id):
-    conn = sqlite3.connect("database.db")
+    conn = connect()
     cur = conn.cursor()
 
     cur.execute(
