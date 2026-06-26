@@ -5,7 +5,7 @@
 # =========================
 
 # তোমার Bot Token এখানে বসাবে
-BOT_TOKEN = "8725731764:AAHXASPhsmaGVS1IRdXCCutRdwAEuvBzxH4"
+BOT_TOKEN = "8143880628:AAEEyhz460ujNZSnHBmjd9RB15zf0n6Lt-U"
 
 # Admin Telegram ID
 ADMIN_ID = 8385436442
