@@ -239,24 +239,20 @@ def get_last_bonus(user_id):
 # ==========================================
 
 def set_last_bonus(
-        user_id,
-        bonus_time):
-
-    conn = connect()
-
+def set_last_bonus(user_id, timestamp):
+    conn = sqlite3.connect("database.db")
     cur = conn.cursor()
 
     cur.execute(
         """
         UPDATE users
-        SET last_bonus=?
-        WHERE user_id=?
+        SET last_bonus = ?
+        WHERE user_id = ?
         """,
-        (bonus_time, user_id)
+        (timestamp, user_id)
     )
 
     conn.commit()
-
     conn.close()
 
 
