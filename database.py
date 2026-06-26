@@ -159,25 +159,20 @@ def get_balance(user_id):
 # ADD BALANCE
 # ==========================================
 
-def update_balance(
-        user_id,
-        amount):
-
-    conn = connect()
-
+def update_balance(user_id, amount):
+    conn = sqlite3.connect("database.db")
     cur = conn.cursor()
 
     cur.execute(
         """
         UPDATE users
         SET balance = balance + ?
-        WHERE user_id=?
+        WHERE user_id = ?
         """,
         (amount, user_id)
     )
 
     conn.commit()
-
     conn.close()
 
 
@@ -210,35 +205,27 @@ def deduct_balance(
 # ==========================================
 
 def get_last_bonus(user_id):
-
-    conn = connect()
-
+    conn = sqlite3.connect("database.db")
     cur = conn.cursor()
 
     cur.execute(
-        """
-        SELECT last_bonus
-        FROM users
-        WHERE user_id=?
-        """,
+        "SELECT last_bonus FROM users WHERE user_id=?",
         (user_id,)
     )
 
-    data = cur.fetchone()
+    row = cur.fetchone()
 
     conn.close()
 
-    if data:
-        return data[0]
+    if row:
+        return row[0] or 0
 
-    return 0
-
+    return 00
 
 # ==========================================
 # SET LAST BONUS TIME
 # ==========================================
 
-def set_last_bonus(
 def set_last_bonus(user_id, timestamp):
     conn = sqlite3.connect("database.db")
     cur = conn.cursor()
