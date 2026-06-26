@@ -1,249 +1,525 @@
 # database.py
 
 import sqlite3
-from config import DEFAULT_PRICES
 
-DB_NAME = "bot.db"
 
+# ==========================================
+# DATABASE CONNECTION
+# ==========================================
 
 def connect():
-    return sqlite3.connect(DB_NAME)
 
+    conn = sqlite3.connect(
+        "bot.db"
+    )
+
+    return conn
+
+
+# ==========================================
+# CREATE TABLES
+# ==========================================
 
 def init_db():
+
     conn = connect()
+
     cur = conn.cursor()
 
-    # Users Table
+    # USERS TABLE
     cur.execute("""
     CREATE TABLE IF NOT EXISTS users (
+
         user_id INTEGER PRIMARY KEY,
+
         balance REAL DEFAULT 0,
+
         last_bonus INTEGER DEFAULT 0
+
     )
     """)
 
-    # Prices Table
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS prices (
-        offer_name TEXT PRIMARY KEY,
-        price REAL
-    )
-    """)
-
-    # Settings Table
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS settings (
-        key TEXT PRIMARY KEY,
-        value TEXT
-    )
-    """)
-
-    # Deposits Table
+    # DEPOSITS TABLE
     cur.execute("""
     CREATE TABLE IF NOT EXISTS deposits (
+
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+
         user_id INTEGER,
+
         method TEXT,
+
         sender_info TEXT,
-        trx_id TEXT,
-        status TEXT DEFAULT 'pending'
+
+        trx_id TEXT
+
     )
     """)
 
-    # Orders Table
+    # ORDERS TABLE
     cur.execute("""
     CREATE TABLE IF NOT EXISTS orders (
+
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+
         user_id INTEGER,
+
         offer_name TEXT,
+
         price REAL,
+
         game_name TEXT,
+
         uid TEXT,
-        level TEXT,
-        status TEXT DEFAULT 'pending'
+
+        level TEXT
+
+    )
+    """)
+
+    # SETTINGS TABLE
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS settings (
+
+        key TEXT PRIMARY KEY,
+
+        value TEXT
+
+    )
+    """)
+
+    # PRICES TABLE
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS prices (
+
+        offer TEXT PRIMARY KEY,
+
+        price REAL
+
     )
     """)
 
     conn.commit()
 
-    # Default Prices Insert
-    for offer, price in DEFAULT_PRICES.items():
-        cur.execute(
-            "INSERT OR IGNORE INTO prices (offer_name, price) VALUES (?, ?)",
-            (offer, price)
-        )
-
-    # Default Payment Methods
-    cur.execute("INSERT OR IGNORE INTO settings VALUES (?, ?)",
-                ("bkash", "0189052****6"))
-
-    cur.execute("INSERT OR IGNORE INTO settings VALUES (?, ?)",
-                ("nagad", "017XXXXXXXX"))
-
-    cur.execute("INSERT OR IGNORE INTO settings VALUES (?, ?)",
-                ("binance", "123456789"))
-
-    conn.commit()
     conn.close()
-
-
-# ======================
+    # ==========================================
 # USER FUNCTIONS
-# ======================
+# ==========================================
 
 def add_user(user_id):
+
     conn = connect()
+
     cur = conn.cursor()
 
     cur.execute(
-        "INSERT OR IGNORE INTO users (user_id) VALUES (?)",
+        """
+        INSERT OR IGNORE INTO users
+        (user_id)
+        VALUES (?)
+        """,
         (user_id,)
     )
 
     conn.commit()
+
     conn.close()
 
 
+# ==========================================
+# GET BALANCE
+# ==========================================
+
 def get_balance(user_id):
+
     conn = connect()
+
     cur = conn.cursor()
 
     cur.execute(
-        "SELECT balance FROM users WHERE user_id=?",
+        """
+        SELECT balance
+        FROM users
+        WHERE user_id=?
+        """,
         (user_id,)
     )
 
     data = cur.fetchone()
+
     conn.close()
 
     if data:
         return data[0]
+
     return 0
 
 
-def update_balance(user_id, amount):
+# ==========================================
+# ADD BALANCE
+# ==========================================
+
+def update_balance(
+        user_id,
+        amount):
+
     conn = connect()
+
     cur = conn.cursor()
 
     cur.execute(
-        "UPDATE users SET balance = balance + ? WHERE user_id=?",
+        """
+        UPDATE users
+        SET balance = balance + ?
+        WHERE user_id=?
+        """,
         (amount, user_id)
     )
 
     conn.commit()
+
     conn.close()
 
 
-# ======================
-# BONUS FUNCTIONS
-# ======================
+# ==========================================
+# DEDUCT BALANCE
+# ==========================================
 
-def get_last_bonus(user_id):
+def deduct_balance(
+        user_id,
+        amount):
+
     conn = connect()
+
     cur = conn.cursor()
 
     cur.execute(
-        "SELECT last_bonus FROM users WHERE user_id=?",
+        """
+        UPDATE users
+        SET balance = balance - ?
+        WHERE user_id=?
+        """,
+        (amount, user_id)
+    )
+
+    conn.commit()
+
+    conn.close()
+# ==========================================
+# BONUS FUNCTIONS
+# ==========================================
+
+def get_last_bonus(user_id):
+
+    conn = connect()
+
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        SELECT last_bonus
+        FROM users
+        WHERE user_id=?
+        """,
         (user_id,)
     )
 
     data = cur.fetchone()
+
     conn.close()
 
     if data:
         return data[0]
+
     return 0
 
 
-def set_last_bonus(user_id, timestamp):
+# ==========================================
+# SET LAST BONUS TIME
+# ==========================================
+
+def set_last_bonus(
+        user_id,
+        bonus_time):
+
     conn = connect()
+
     cur = conn.cursor()
 
     cur.execute(
-        "UPDATE users SET last_bonus=? WHERE user_id=?",
-        (timestamp, user_id)
+        """
+        UPDATE users
+        SET last_bonus=?
+        WHERE user_id=?
+        """,
+        (bonus_time, user_id)
     )
 
     conn.commit()
+
     conn.close()
 
 
-# ======================
-# PRICE FUNCTIONS
-# ======================
+# ==========================================
+# ADD DEPOSIT
+# ==========================================
 
-def get_price(offer):
+def add_deposit(
+        user_id,
+        method,
+        sender_info,
+        trx_id):
+
     conn = connect()
+
     cur = conn.cursor()
 
     cur.execute(
-        "SELECT price FROM prices WHERE offer_name=?",
-        (offer,)
+        """
+        INSERT INTO deposits
+        (user_id, method, sender_info, trx_id)
+
+        VALUES (?, ?, ?, ?)
+        """,
+        (
+            user_id,
+            method,
+            sender_info,
+            trx_id
+        )
+    )
+
+    deposit_id = cur.lastrowid
+
+    conn.commit()
+
+    conn.close()
+
+    return deposit_id
+
+
+# ==========================================
+# GET DEPOSIT
+# ==========================================
+
+def get_deposit(deposit_id):
+
+    conn = connect()
+
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        SELECT *
+        FROM deposits
+        WHERE id=?
+        """,
+        (deposit_id,)
     )
 
     data = cur.fetchone()
+
     conn.close()
 
-    if data:
-        return data[0]
-    return None
+    return data
+# ==========================================
+# ORDER FUNCTIONS
+# ==========================================
 
+def add_order(
+        user_id,
+        offer_name,
+        price,
+        game_name,
+        uid,
+        level):
 
-def set_price(offer, new_price):
     conn = connect()
     cur = conn.cursor()
 
     cur.execute(
-        "UPDATE prices SET price=? WHERE offer_name=?",
-        (new_price, offer)
+        """
+        INSERT INTO orders
+        (user_id, offer_name, price, game_name, uid, level)
+
+        VALUES (?, ?, ?, ?, ?, ?)
+        """,
+        (
+            user_id,
+            offer_name,
+            price,
+            game_name,
+            uid,
+            level
+        )
     )
+
+    order_id = cur.lastrowid
 
     conn.commit()
     conn.close()
 
+    return order_id
 
-def get_all_prices():
+
+def get_order(order_id):
+
     conn = connect()
     cur = conn.cursor()
 
-    cur.execute("SELECT offer_name, price FROM prices")
+    cur.execute(
+        """
+        SELECT *
+        FROM orders
+        WHERE id=?
+        """,
+        (order_id,)
+    )
 
-    data = cur.fetchall()
+    data = cur.fetchone()
+
     conn.close()
 
     return data
 
 
-# ======================
-# PAYMENT METHODS
-# ======================
+# ==========================================
+# PRICE FUNCTIONS
+# ==========================================
 
-def get_setting(key):
+def get_price(offer):
+
     conn = connect()
     cur = conn.cursor()
 
     cur.execute(
-        "SELECT value FROM settings WHERE key=?",
-        (key,)
+        """
+        SELECT price
+        FROM prices
+        WHERE offer=?
+        """,
+        (offer,)
     )
 
     data = cur.fetchone()
+
     conn.close()
 
     if data:
         return data[0]
-    return None
+
+    # Default Price List
+    default_prices = {
+        "25 Diamond": 27,
+        "50 Diamond": 42,
+        "115 Diamond": 86,
+        "240 Diamond": 168,
+        "355 Diamond": 250,
+        "480 Diamond": 325,
+        "610 Diamond": 410,
+        "850 Diamond": 560,
+        "1240 Diamond": 820,
+        "2530 Diamond": 1650,
+        "5060 Diamond": 3250,
+        "10120 Diamond": 6500,
+        "Weekly": 170,
+        "Monthly": 910
+    }
+
+    return default_prices.get(offer, 0)
 
 
-def set_setting(key, value):
+def set_price(
+        offer,
+        price):
+
     conn = connect()
     cur = conn.cursor()
 
-    cur.execute("""
-    INSERT OR REPLACE INTO settings (key, value)
-    VALUES (?, ?)
-    """, (key, value))
+    cur.execute(
+        """
+        INSERT OR REPLACE INTO prices
+        (offer, price)
+
+        VALUES (?, ?)
+        """,
+        (offer, price)
+    )
 
     conn.commit()
     conn.close()
+
+
+# ==========================================
+# PAYMENT SETTINGS
+# ==========================================
+
+def get_setting(key):
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        SELECT value
+        FROM settings
+        WHERE key=?
+        """,
+        (key,)
+    )
+
+    data = cur.fetchone()
+
+    conn.close()
+
+    if data:
+        return data[0]
+
+    defaults = {
+        "bkash": "0189052****6",
+        "nagad": "017XXXXXXXX",
+        "binance": "example_binance_id"
+    }
+
+    return defaults.get(key, "Not Set")
+
+
+def set_setting(
+        key,
+        value):
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        INSERT OR REPLACE INTO settings
+        (key, value)
+
+        VALUES (?, ?)
+        """,
+        (key, value)
+    )
+
+    conn.commit()
+    conn.close()
+
+
+# ==========================================
+# GET ALL USERS
+# ==========================================
+
+def get_all_users():
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        "SELECT user_id FROM users"
+    )
+
+    rows = cur.fetchall()
+
+    conn.close()
+
+    return [row[0] for row in rows]
