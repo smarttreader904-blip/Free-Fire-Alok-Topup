@@ -12,7 +12,8 @@ from aiogram.fsm.context import FSMContext
 from config import (
     ADMIN_ID,
     BONUS_AMOUNT,
-    BONUS_COOLDOWN
+    BONUS_COOLDOWN,
+    REFERRAL_BONUS
 )
 
 from database import (
