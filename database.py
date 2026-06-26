@@ -89,30 +89,30 @@ def init_db():
     """)
 
     # PRICES TABLE
-cur.execute("""
-CREATE TABLE IF NOT EXISTS prices (
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS prices (
 
-    offer TEXT PRIMARY KEY,
+        offer TEXT PRIMARY KEY,
 
-    price REAL
+        price REAL
 
-)
-""")
+    )
+    """)
 
-# REFERRALS TABLE
-cur.execute("""
-CREATE TABLE IF NOT EXISTS referrals (
+    # REFERRALS TABLE
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS referrals (
 
-    user_id INTEGER PRIMARY KEY,
+        user_id INTEGER PRIMARY KEY,
 
-    referrer_id INTEGER
+        referrer_id INTEGER
 
-)
-""")
+    )
+    """)
 
-conn.commit()
+    conn.commit()
 
-conn.close()
+    conn.close()
     # ==========================================
 # USER FUNCTIONS
 # ==========================================
