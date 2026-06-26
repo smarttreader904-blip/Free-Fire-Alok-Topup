@@ -31,6 +31,8 @@ from database import (
     get_deposit,
     get_all_users,
     set_price,
+has_referred,
+save_referral,
     set_setting
 )
 
@@ -94,16 +96,23 @@ async def start_cmd(message: Message):
 
     add_user(message.from_user.id)
 
-    # Referral System
     if len(args) > 1:
 
         referrer_id = int(args[1])
 
-        if referrer_id != message.from_user.id:
+        if (
+            referrer_id != message.from_user.id
+            and not has_referred(message.from_user.id)
+        ):
 
             update_balance(
                 referrer_id,
                 REFERRAL_BONUS
+            )
+
+            save_referral(
+                message.from_user.id,
+                referrer_id
             )
 
             try:
