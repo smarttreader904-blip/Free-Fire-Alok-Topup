@@ -289,11 +289,11 @@ async def sender_info_handler(
     )
 
     await message.answer(
-        "🧾 এখন Transaction ID পাঠান:"
+        "💰 আপনি কত টাকা Deposit করেছেন লিখুন:"
     )
 
     await state.set_state(
-        DepositState.waiting_trx_id
+        DepositState.waiting_amount
     )
 
 
