@@ -102,38 +102,52 @@ offer_kb = InlineKeyboardMarkup(
         ],
 
         # ৩য় লাইন
-        [
-            InlineKeyboardButton(
-                text="610 Diamond",
-                callback_data="offer_610 Diamond"
-            ),
-            InlineKeyboardButton(
-                text="850 Diamond",
-                callback_data="offer_850 Diamond"
-            ),
-            InlineKeyboardButton(
-                text="1240 Diamond",
-                callback_data="offer_1240 Diamond"
-            )
-        ],
+[
+    InlineKeyboardButton(
+        text="505 Diamond",
+        callback_data="offer_505 Diamond"
+    ),
+    InlineKeyboardButton(
+        text="610 Diamond",
+        callback_data="offer_610 Diamond"
+    ),
+    InlineKeyboardButton(
+        text="850 Diamond",
+        callback_data="offer_850 Diamond"
+    )
+],
 
-        # ৪র্থ লাইন
-        [
-            InlineKeyboardButton(
-                text="2530 Diamond",
-                callback_data="offer_2530 Diamond"
-            ),
-            InlineKeyboardButton(
-                text="5060 Diamond",
-                callback_data="offer_5060 Diamond"
-            ),
-            InlineKeyboardButton(
-                text="10120 Diamond",
-                callback_data="offer_10120 Diamond"
-            )
-        ]
-    ]
-)
+# ৪র্থ লাইন
+[
+    InlineKeyboardButton(
+        text="1090 Diamond",
+        callback_data="offer_1090 Diamond"
+    ),
+    InlineKeyboardButton(
+        text="1240 Diamond",
+        callback_data="offer_1240 Diamond"
+    ),
+    InlineKeyboardButton(
+        text="2530 Diamond",
+        callback_data="offer_2530 Diamond"
+    )
+],
+
+# ৫ম লাইন
+[
+    InlineKeyboardButton(
+        text="5060 Diamond",
+        callback_data="offer_5060 Diamond"
+    ),
+    InlineKeyboardButton(
+        text="7590 Diamond",
+        callback_data="offer_7590 Diamond"
+    ),
+    InlineKeyboardButton(
+        text="10120 Diamond",
+        callback_data="offer_10120 Diamond"
+    )
+]
 
 # =========================
 # BUY BUTTON
