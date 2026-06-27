@@ -80,6 +80,10 @@ class SetMoneyState(StatesGroup):
     waiting_user_id = State()
     waiting_amount = State()
 
+class AddOfferState(StatesGroup):
+    waiting_offer_name = State()
+    waiting_price = State()
+    
 class RejectOrderState(StatesGroup):
     waiting_reason = State()
 
