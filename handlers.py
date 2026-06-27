@@ -1209,6 +1209,45 @@ async def admin_help(message: Message):
 /start - Main Menu
 """
             )
+    # ==========================================
+# USER DATA COMMAND
+# ==========================================
+
+@router.message(Command("data"))
+async def user_data_command(message: Message):
+
+    if message.from_user.id != ADMIN_ID:
+        return
+
+    users = get_users_full_data()
+
+    if not users:
+        await message.answer("❌ কোনো User পাওয়া যায়নি।")
+        return
+
+    text = "📊 User Data List\n\n"
+
+    for user in users:
+
+        user_id = user[0]
+        balance = user[1]
+
+        try:
+            chat = await message.bot.get_chat(user_id)
+
+            name = chat.full_name
+
+        except:
+            name = "Unknown"
+
+        text += (
+            f"👤 Name: {name}\n"
+            f"🆔 User ID: {user_id}\n"
+            f"💰 Balance: {balance} Tk\n"
+            f"━━━━━━━━━━━━━━\n"
+        )
+
+    await message.answer(text)
 # ==========================================
 # CANCEL COMMAND
 # ==========================================
