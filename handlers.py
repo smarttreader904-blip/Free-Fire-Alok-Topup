@@ -33,6 +33,9 @@ from database import (
     set_price,
 has_referred,
 save_referral,
+add_offer,
+get_all_offers,
+get_offer_price,
 get_users_full_data,
     set_setting
 )
