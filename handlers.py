@@ -1232,7 +1232,7 @@ async def cancel_process(
 # REFER SYSTEM
 # ==========================================
 
-@router.message(F.text == "👥 Refer")
+@router.message(F.text == "👥 রেফার")
 async def refer_cmd(message: Message):
 
     bot_info = await message.bot.get_me()
