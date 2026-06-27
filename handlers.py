@@ -895,6 +895,70 @@ async def save_deposit_reject_reason(
     )
 
     await state.clear() 
+   # ==========================================
+# ADD OFFER COMMAND
+# ==========================================
+
+@router.message(Command("button"))
+async def add_offer_cmd(
+        message: Message,
+        state: FSMContext):
+
+    if message.from_user.id != ADMIN_ID:
+        return
+
+    await message.answer(
+        "🎁 Offer Name লিখুন:"
+    )
+
+    await state.set_state(
+        AddOfferState.waiting_offer_name
+    )
+
+
+@router.message(
+    AddOfferState.waiting_offer_name
+)
+async def get_offer_name(
+        message: Message,
+        state: FSMContext):
+
+    await state.update_data(
+        offer_name=message.text
+    )
+
+    await message.answer(
+        "💰 Price লিখুন:"
+    )
+
+    await state.set_state(
+        AddOfferState.waiting_price
+    )
+
+
+@router.message(
+    AddOfferState.waiting_price
+)
+async def save_offer(
+        message: Message,
+        state: FSMContext):
+
+    data = await state.get_data()
+
+    offer_name = data["offer_name"]
+
+    price = float(message.text)
+
+    add_offer(
+        offer_name,
+        price
+    )
+
+    await message.answer(
+        "✅ Offer Added Successfully"
+    )
+
+    await state.clear()         
 # ==========================================
 # PRICE COMMAND
 # ==========================================
