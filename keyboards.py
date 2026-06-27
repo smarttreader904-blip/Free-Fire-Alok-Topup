@@ -293,3 +293,28 @@ price_change_kb = InlineKeyboardMarkup(
         ]
     ]
 )
+# =========================
+# BUY BUTTON
+# =========================
+
+def buy_offer_kb(offer_name):
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="🛒 Buy Offer",
+                    callback_data=f"buy_{offer_name}"
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text="🔙 Back",
+                    callback_data="back_offer_menu"
+                ),
+                InlineKeyboardButton(
+                    text="🏠 Menu",
+                    callback_data="main_menu"
+                )
+            ]
+        ]
+)
