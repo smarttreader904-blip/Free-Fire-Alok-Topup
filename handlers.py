@@ -420,7 +420,7 @@ async def show_offer(
         "offer_", ""
     )
 
-    price = get_price(offer)
+    price = get_offer_price(offer)
 
     await callback.message.edit_text(
         f"""
