@@ -553,17 +553,21 @@ def save_referral(user_id, referrer_id):
 
     conn.commit()
     conn.close()
+# ==========================================
+# GET FULL USER DATA
+# ==========================================
+
 def get_users_full_data():
 
-    conn = sqlite3.connect("database.db")
-    cursor = conn.cursor()
+    conn = connect()
+    cur = conn.cursor()
 
-    cursor.execute("""
-        SELECT id, balance
+    cur.execute("""
+        SELECT user_id, balance
         FROM users
     """)
 
-    data = cursor.fetchall()
+    data = cur.fetchall()
 
     conn.close()
 
