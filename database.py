@@ -582,3 +582,64 @@ def get_users_full_data():
     conn.close()
 
     return data
+    # ==========================================
+# OFFER FUNCTIONS
+# ==========================================
+
+def add_offer(offer_name, price):
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        INSERT INTO offers
+        (offer_name, price)
+
+        VALUES (?, ?)
+        """,
+        (offer_name, price)
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def get_all_offers():
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        "SELECT offer_name, price FROM offers"
+    )
+
+    data = cur.fetchall()
+
+    conn.close()
+
+    return data
+
+
+def get_offer_price(offer_name):
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        SELECT price
+        FROM offers
+        WHERE offer_name=?
+        """,
+        (offer_name,)
+    )
+
+    data = cur.fetchone()
+
+    conn.close()
+
+    if data:
+        return data[0]
+
+    return 0
