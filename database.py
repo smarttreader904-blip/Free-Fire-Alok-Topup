@@ -98,6 +98,16 @@ def init_db():
 
     )
     """)
+    # OFFERS TABLE
+cur.execute("""
+CREATE TABLE IF NOT EXISTS offers (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    offer_name TEXT,
+    price REAL
+
+)
+""")
 
     # REFERRALS TABLE
     cur.execute("""
