@@ -233,62 +233,51 @@ async def add_balance_menu(
     )
 
 
-@router.message(F.text == "🎁 ডায়মন্ড")
-async def offer_menu(message: Message):
+from aiogram.utils.keyboard import ReplyKeyboardBuilder
 
-    offers = get_all_offers()
+builder = ReplyKeyboardBuilder()
 
-    from aiogram.types import (
-        InlineKeyboardMarkup,
-        InlineKeyboardButton
+# পুরাতন অফার
+offers = [
+    "WEEKLY",
+    "MONTHLY",
+    "25 Diamond",
+    "50 Diamond",
+    "115 Diamond",
+    "240 Diamond",
+    "355 Diamond",
+    "480 Diamond",
+    "610 Diamond",
+    "850 Diamond",
+    "1240 Diamond",
+    "2530 Diamond",
+    "5060 Diamond",
+    "10120 Diamond"
+]
+
+# Database থেকে নতুন অফার আনো
+custom_offers = get_all_offers()
+
+# পুরাতন অফার যোগ
+for offer in offers:
+    builder.button(text=offer)
+
+# নতুন অফার যোগ
+for offer_name, price in custom_offers:
+    builder.button(text=offer_name)
+
+# প্রতি লাইনে ৩টা বাটন
+builder.adjust(3)
+
+# Menu Button
+builder.button(text="🏠 Menu")
+
+await message.answer(
+    "🛒 নিচের Offer থেকে একটি নির্বাচন করুন:",
+    reply_markup=builder.as_markup(
+        resize_keyboard=True
     )
-
-    buttons = []
-
-    # Default Offers
-    default_offers = [
-        "25 Diamond",
-        "50 Diamond",
-        "115 Diamond",
-        "240 Diamond",
-        "355 Diamond",
-        "480 Diamond",
-        "610 Diamond",
-        "850 Diamond",
-        "1240 Diamond",
-        "2530 Diamond",
-        "5060 Diamond",
-        "10120 Diamond",
-        "Weekly",
-        "Monthly"
-    ]
-
-    # পুরাতন Offer গুলো
-    for offer in default_offers:
-        buttons.append([
-            InlineKeyboardButton(
-                text=offer,
-                callback_data=f"offer_{offer}"
-            )
-        ])
-
-    # নতুন Add করা Offer গুলো
-    for offer in offers:
-        buttons.append([
-            InlineKeyboardButton(
-                text=offer[0],
-                callback_data=f"offer_{offer[0]}"
-            )
-        ])
-
-    kb = InlineKeyboardMarkup(
-        inline_keyboard=buttons
-    )
-
-    await message.answer(
-        "🛒 নিচের Offer থেকে একটি নির্বাচন করুন:",
-        reply_markup=kb
-    )
+)
 # ==========================================
 # PAYMENT METHOD CALLBACK
 # ==========================================
