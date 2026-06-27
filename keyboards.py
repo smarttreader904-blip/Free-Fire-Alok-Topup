@@ -250,22 +250,12 @@ price_change_kb = InlineKeyboardMarkup(
                 callback_data="price_480 Diamond"
             )
         ],
-        
+
         [
-    InlineKeyboardButton(
-        text="610 Diamond",
-        callback_data="price_610 Diamond"
-    ),
-    InlineKeyboardButton(
-        text="850 Diamond",
-        callback_data="price_850 Diamond"
-    ),
-    InlineKeyboardButton(
-        text="1240 Diamond",
-        callback_data="price_1240 Diamond"
-    )
-],
-        [
+            InlineKeyboardButton(
+                text="505 Diamond",
+                callback_data="price_505 Diamond"
+            ),
             InlineKeyboardButton(
                 text="610 Diamond",
                 callback_data="price_610 Diamond"
@@ -273,21 +263,32 @@ price_change_kb = InlineKeyboardMarkup(
             InlineKeyboardButton(
                 text="850 Diamond",
                 callback_data="price_850 Diamond"
-            ),
-            InlineKeyboardButton(
-                text="1240 Diamond",
-                callback_data="price_1240 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
+                text="1090 Diamond",
+                callback_data="price_1090 Diamond"
+            ),
+            InlineKeyboardButton(
+                text="1240 Diamond",
+                callback_data="price_1240 Diamond"
+            ),
+            InlineKeyboardButton(
                 text="2530 Diamond",
                 callback_data="price_2530 Diamond"
-            ),
+            )
+        ],
+
+        [
             InlineKeyboardButton(
                 text="5060 Diamond",
                 callback_data="price_5060 Diamond"
+            ),
+            InlineKeyboardButton(
+                text="7590 Diamond",
+                callback_data="price_7590 Diamond"
             ),
             InlineKeyboardButton(
                 text="10120 Diamond",
