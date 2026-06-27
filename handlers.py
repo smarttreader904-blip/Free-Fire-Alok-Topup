@@ -245,8 +245,35 @@ async def offer_menu(message: Message):
 
     buttons = []
 
-    for offer in offers:
+    # Default Offers
+    default_offers = [
+        "25 Diamond",
+        "50 Diamond",
+        "115 Diamond",
+        "240 Diamond",
+        "355 Diamond",
+        "480 Diamond",
+        "610 Diamond",
+        "850 Diamond",
+        "1240 Diamond",
+        "2530 Diamond",
+        "5060 Diamond",
+        "10120 Diamond",
+        "Weekly",
+        "Monthly"
+    ]
 
+    # পুরাতন Offer গুলো
+    for offer in default_offers:
+        buttons.append([
+            InlineKeyboardButton(
+                text=offer,
+                callback_data=f"offer_{offer}"
+            )
+        ])
+
+    # নতুন Add করা Offer গুলো
+    for offer in offers:
         buttons.append([
             InlineKeyboardButton(
                 text=offer[0],
