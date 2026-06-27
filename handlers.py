@@ -71,7 +71,10 @@ class PriceState(StatesGroup):
 
 class PaymentState(StatesGroup):
     waiting_new_payment = State()
-
+    
+class SetMoneyState(StatesGroup):
+    waiting_user_id = State()
+    waiting_amount = State()
 
 class RejectOrderState(StatesGroup):
     waiting_reason = State()
@@ -1326,7 +1329,92 @@ async def unknown_message(
 """,
         reply_markup=start_kb
             )
+# ==========================================
+# SET MONEY COMMAND
+# ==========================================
 
+@router.message(Command("setmoney"))
+async def set_money_cmd(
+        message: Message,
+        state: FSMContext):
+
+    if message.from_user.id != ADMIN_ID:
+        return
+
+    await message.answer(
+        "🆔 Please Send User Chat ID:"
+    )
+
+    await state.set_state(
+        SetMoneyState.waiting_user_id
+    )
+
+
+@router.message(
+    SetMoneyState.waiting_user_id
+)
+async def get_user_id(
+        message: Message,
+        state: FSMContext):
+
+    await state.update_data(
+        target_user_id=int(message.text)
+    )
+
+    await message.answer(
+        "💰 কত টাকা Add করবেন লিখুন:"
+    )
+
+    await state.set_state(
+        SetMoneyState.waiting_amount
+    )
+
+
+@router.message(
+    SetMoneyState.waiting_amount
+)
+async def add_money_to_user(
+        message: Message,
+        state: FSMContext):
+
+    data = await state.get_data()
+
+    user_id = data["target_user_id"]
+    amount = float(message.text)
+
+    update_balance(
+        user_id,
+        amount
+    )
+
+    await message.answer(
+        f"✅ {user_id} এর Balance এ {amount} Tk যোগ করা হয়েছে।"
+    )
+
+    try:
+        await message.bot.send_message(
+            user_id,
+            f"🎉 Admin আপনার Balance এ {amount} Tk যোগ করেছেন।"
+        )
+    except:
+        pass
+
+    await state.clear()
+
+
+# ==========================================
+# UNKNOWN TEXT HANDLER
+# ==========================================
+
+@router.message()
+async def unknown_message(
+        message: Message):
+
+    await message.answer(
+        """
+❌ এই অপশনটি সঠিক নয়।
+"""
+)
 # ==========================================
 # UNKNOWN TEXT HANDLER
 # ==========================================
