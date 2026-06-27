@@ -141,7 +141,7 @@ async def start_cmd(message: Message):
 # ==========================================
 
 @router.message(Command("balance"))
-@router.message(F.text == "💰 Balance")
+@router.message(F.text == "💰 ব্যালেন্স")
 async def balance_cmd(message: Message):
 
     balance = get_balance(
@@ -162,7 +162,7 @@ Balance: {balance} Tk
 # ==========================================
 
 @router.message(Command("bonus"))
-@router.message(F.text == "🎉 Bonus")
+@router.message(F.text == "🎉 বোনাস")
 async def bonus_cmd(message: Message):
 
     user_id = message.from_user.id
