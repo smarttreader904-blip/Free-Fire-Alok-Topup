@@ -69,7 +69,6 @@ offer_kb = InlineKeyboardMarkup(
             )
         ],
 
-        # ১ম লাইন
         [
             InlineKeyboardButton(
                 text="25 Diamond",
@@ -85,7 +84,6 @@ offer_kb = InlineKeyboardMarkup(
             )
         ],
 
-        # ২য় লাইন
         [
             InlineKeyboardButton(
                 text="240 Diamond",
@@ -101,80 +99,52 @@ offer_kb = InlineKeyboardMarkup(
             )
         ],
 
-        # ৩য় লাইন
-[
-    InlineKeyboardButton(
-        text="505 Diamond",
-        callback_data="offer_505 Diamond"
-    ),
-    InlineKeyboardButton(
-        text="610 Diamond",
-        callback_data="offer_610 Diamond"
-    ),
-    InlineKeyboardButton(
-        text="850 Diamond",
-        callback_data="offer_850 Diamond"
-    )
-],
+        [
+            InlineKeyboardButton(
+                text="505 Diamond",
+                callback_data="offer_505 Diamond"
+            ),
+            InlineKeyboardButton(
+                text="610 Diamond",
+                callback_data="offer_610 Diamond"
+            ),
+            InlineKeyboardButton(
+                text="850 Diamond",
+                callback_data="offer_850 Diamond"
+            )
+        ],
 
-# ৪র্থ লাইন
-[
-    InlineKeyboardButton(
-        text="1090 Diamond",
-        callback_data="offer_1090 Diamond"
-    ),
-    InlineKeyboardButton(
-        text="1240 Diamond",
-        callback_data="offer_1240 Diamond"
-    ),
-    InlineKeyboardButton(
-        text="2530 Diamond",
-        callback_data="offer_2530 Diamond"
-    )
-],
+        [
+            InlineKeyboardButton(
+                text="1090 Diamond",
+                callback_data="offer_1090 Diamond"
+            ),
+            InlineKeyboardButton(
+                text="1240 Diamond",
+                callback_data="offer_1240 Diamond"
+            ),
+            InlineKeyboardButton(
+                text="2530 Diamond",
+                callback_data="offer_2530 Diamond"
+            )
+        ],
 
-# ৫ম লাইন
-[
-    InlineKeyboardButton(
-        text="5060 Diamond",
-        callback_data="offer_5060 Diamond"
-    ),
-    InlineKeyboardButton(
-        text="7590 Diamond",
-        callback_data="offer_7590 Diamond"
-    ),
-    InlineKeyboardButton(
-        text="10120 Diamond",
-        callback_data="offer_10120 Diamond"
-    )
-]
-
-# =========================
-# BUY BUTTON
-# =========================
-
-def buy_offer_kb(offer_name):
-    return InlineKeyboardMarkup(
-        inline_keyboard=[
-            [
-                InlineKeyboardButton(
-                    text="🛒 Buy Offer",
-                    callback_data=f"buy_{offer_name}"
-                )
-            ],
-            [
-                InlineKeyboardButton(
-                    text="🔙 Back",
-                    callback_data="back_offer_menu"
-                ),
-                InlineKeyboardButton(
-                    text="🏠 Menu",
-                    callback_data="main_menu"
-                )
-            ]
+        [
+            InlineKeyboardButton(
+                text="5060 Diamond",
+                callback_data="offer_5060 Diamond"
+            ),
+            InlineKeyboardButton(
+                text="7590 Diamond",
+                callback_data="offer_7590 Diamond"
+            ),
+            InlineKeyboardButton(
+                text="10120 Diamond",
+                callback_data="offer_10120 Diamond"
+            )
         ]
-    )
-
+    ]
+)
 # =========================
 # ADMIN DEPOSIT BUTTONS
 # =========================
