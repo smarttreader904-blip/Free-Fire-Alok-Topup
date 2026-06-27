@@ -234,12 +234,34 @@ async def add_balance_menu(
 
 
 @router.message(F.text == "🎁 ডায়মন্ড")
-async def offer_menu(
-        message: Message):
+async def offer_menu(message: Message):
+
+    offers = get_all_offers()
+
+    from aiogram.types import (
+        InlineKeyboardMarkup,
+        InlineKeyboardButton
+    )
+
+    buttons = []
+
+    for offer in offers:
+
+        buttons.append([
+            InlineKeyboardButton(
+                text=offer[0],
+                callback_data=f"offer_{offer[0]}"
+            )
+        ])
+
+    kb = InlineKeyboardMarkup(
+        inline_keyboard=buttons
+    )
 
     await message.answer(
         "🛒 নিচের Offer থেকে একটি নির্বাচন করুন:",
-        reply_markup=offer_kb
+        reply_markup=kb
+    )
 )
 # ==========================================
 # PAYMENT METHOD CALLBACK
