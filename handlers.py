@@ -262,7 +262,6 @@ async def offer_menu(message: Message):
         "🛒 নিচের Offer থেকে একটি নির্বাচন করুন:",
         reply_markup=kb
     )
-)
 # ==========================================
 # PAYMENT METHOD CALLBACK
 # ==========================================
