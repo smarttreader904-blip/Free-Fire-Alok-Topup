@@ -438,6 +438,9 @@ async def show_offer(
         "offer_", ""
     )
 
+    price = get_price(offer)
+
+if price == 0:
     price = get_offer_price(offer)
 
     await callback.message.edit_text(
