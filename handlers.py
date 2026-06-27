@@ -233,51 +233,54 @@ async def add_balance_menu(
     )
 
 
-from aiogram.utils.keyboard import ReplyKeyboardBuilder
+# ==========================================
+# DIAMOND MENU
+# ==========================================
 
-builder = ReplyKeyboardBuilder()
+@router.message(F.text == "🎁 ডায়মন্ড")
+async def diamond_menu(message: Message):
 
-# পুরাতন অফার
-offers = [
-    "WEEKLY",
-    "MONTHLY",
-    "25 Diamond",
-    "50 Diamond",
-    "115 Diamond",
-    "240 Diamond",
-    "355 Diamond",
-    "480 Diamond",
-    "610 Diamond",
-    "850 Diamond",
-    "1240 Diamond",
-    "2530 Diamond",
-    "5060 Diamond",
-    "10120 Diamond"
-]
+    builder = ReplyKeyboardBuilder()
 
-# Database থেকে নতুন অফার আনো
-custom_offers = get_all_offers()
+    default_offers = [
+        "WEEKLY",
+        "MONTHLY",
+        "25 Diamond",
+        "50 Diamond",
+        "115 Diamond",
+        "240 Diamond",
+        "355 Diamond",
+        "480 Diamond",
+        "610 Diamond",
+        "850 Diamond",
+        "1240 Diamond",
+        "2530 Diamond",
+        "5060 Diamond",
+        "10120 Diamond"
+    ]
 
-# পুরাতন অফার যোগ
-for offer in offers:
-    builder.button(text=offer)
+    # পুরাতন অফার যোগ
+    for offer in default_offers:
+        builder.button(text=offer)
 
-# নতুন অফার যোগ
-for offer_name, price in custom_offers:
-    builder.button(text=offer_name)
+    # নতুন অফার যোগ
+    custom_offers = get_all_offers()
 
-# প্রতি লাইনে ৩টা বাটন
-builder.adjust(3)
+    for offer_name, price in custom_offers:
+        builder.button(text=offer_name)
 
-# Menu Button
-builder.button(text="🏠 Menu")
+    # প্রতি লাইনে ৩টা বাটন
+    builder.adjust(3)
 
-await message.answer(
-    "🛒 নিচের Offer থেকে একটি নির্বাচন করুন:",
-    reply_markup=builder.as_markup(
-        resize_keyboard=True
+    # Menu Button
+    builder.button(text="🏠 Menu")
+
+    await message.answer(
+        "🛒 নিচের Offer থেকে একটি নির্বাচন করুন:",
+        reply_markup=builder.as_markup(
+            resize_keyboard=True
+        )
     )
-)
 # ==========================================
 # PAYMENT METHOD CALLBACK
 # ==========================================
