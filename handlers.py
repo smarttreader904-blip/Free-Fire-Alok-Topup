@@ -1312,7 +1312,77 @@ async def main_menu_callback(callback: CallbackQuery):
 
     await callback.answer()
 
+# ==========================================
+# SET MONEY COMMAND
+# ==========================================
 
+@router.message(Command("setmoney"))
+async def set_money_cmd(
+        message: Message,
+        state: FSMContext):
+
+    if message.from_user.id != ADMIN_ID:
+        return
+
+    await message.answer(
+        "🆔 User ID পাঠান:"
+    )
+
+    await state.set_state(
+        SetMoneyState.waiting_user_id
+    )
+
+
+@router.message(
+    SetMoneyState.waiting_user_id
+)
+async def get_user_id(
+        message: Message,
+        state: FSMContext):
+
+    await state.update_data(
+        target_user_id=int(message.text)
+    )
+
+    await message.answer(
+        "💰 কত টাকা Add করবেন?"
+    )
+
+    await state.set_state(
+        SetMoneyState.waiting_amount
+    )
+
+
+@router.message(
+    SetMoneyState.waiting_amount
+)
+async def add_money_to_user(
+        message: Message,
+        state: FSMContext):
+
+    data = await state.get_data()
+
+    user_id = data["target_user_id"]
+    amount = float(message.text)
+
+    update_balance(
+        user_id,
+        amount
+    )
+
+    await message.answer(
+        f"✅ {amount} Tk যোগ করা হয়েছে।"
+    )
+
+    try:
+        await message.bot.send_message(
+            user_id,
+            f"🎉 Admin আপনার Balance এ {amount} Tk যোগ করেছেন।"
+        )
+    except:
+        pass
+
+    await state.clear()
 # ==========================================
 # UNKNOWN TEXT HANDLER
 # ==========================================
@@ -1329,20 +1399,3 @@ async def unknown_message(
 """,
         reply_markup=start_kb
             )
-
-# ==========================================
-# UNKNOWN TEXT HANDLER
-# ==========================================
-
-@router.message()
-async def unknown_message(
-        message: Message):
-
-    await message.answer(
-        """
-❌ এই অপশনটি সঠিক নয়।
-
-দয়া করে /start চাপুন অথবা মেনু থেকে একটি অপশন নির্বাচন করুন।
-""",
-        reply_markup=start_kb
-            )    
