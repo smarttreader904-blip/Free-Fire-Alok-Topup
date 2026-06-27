@@ -453,7 +453,7 @@ async def buy_offer(
         "buy_", ""
     )
 
-    price = get_price(offer)
+    price = get_offer_price(offer)
 
     balance = get_balance(
         callback.from_user.id
