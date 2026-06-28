@@ -1446,6 +1446,12 @@ async def add_money_to_user(
         pass
 
     await state.clear()
+@router.message(F.text.startswith("/"))
+async def any_command(
+        message: Message,
+        state: FSMContext):
+
+    await state.clear()            
 # ==========================================
 # UNKNOWN TEXT HANDLER
 # ==========================================
