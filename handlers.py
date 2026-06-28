@@ -1382,6 +1382,8 @@ async def set_money_cmd(
         message: Message,
         state: FSMContext):
 
+    await state.clear()
+
     if message.from_user.id != ADMIN_ID:
         return
 
