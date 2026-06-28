@@ -1202,9 +1202,12 @@ def is_admin(user_id):
 # ADMIN HELP COMMAND
 # ==========================================
 
-@router.message(Command("admin"))
-async def admin_help(message: Message):
+@router.message(Command("help"))
+async def help_command(
+        message: Message,
+        state: FSMContext):
 
+    await state.clear()
     if not is_admin(message.from_user.id):
         return
 
@@ -1229,8 +1232,11 @@ async def admin_help(message: Message):
 # ==========================================
 
 @router.message(Command("data"))
-async def user_data_command(message: Message):
+async def user_data_command(
+        message: Message,
+        state: FSMContext):
 
+    await state.clear()
     if message.from_user.id != ADMIN_ID:
         return
 
