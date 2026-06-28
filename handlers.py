@@ -94,7 +94,11 @@ class ApproveDepositState(StatesGroup):
 # ==========================================
 
 @router.message(Command("start"))
-async def start_cmd(message: Message):
+async def start_cmd(
+        message: Message,
+        state: FSMContext):
+
+    await state.clear()
 
     args = message.text.split()
 
@@ -143,8 +147,11 @@ async def start_cmd(message: Message):
 
 @router.message(Command("balance"))
 @router.message(F.text == "💰 ব্যালেন্স")
-async def balance_cmd(message: Message):
+async def balance_cmd(
+        message: Message,
+        state: FSMContext):
 
+    await state.clear()
     balance = get_balance(
         message.from_user.id
     )
@@ -164,8 +171,11 @@ Balance: {balance} Tk
 
 @router.message(Command("bonus"))
 @router.message(F.text == "🎉 বোনাস")
-async def bonus_cmd(message: Message):
+async def bonus_cmd(
+        message: Message,
+        state: FSMContext):
 
+    await state.clear()
     user_id = message.from_user.id
 
     last_bonus = get_last_bonus(user_id)
