@@ -259,7 +259,7 @@ async def payment_method(
     )
 
     await callback.message.edit_text(
-    f"""
+        f"""
 💳 Payment Method: {method.upper()}
 
 📋 নিচের নাম্বারে ক্লিক করে Copy করুন:
@@ -269,14 +269,14 @@ async def payment_method(
 পেমেন্ট সম্পন্ন করার পর যেই নাম্বার থেকে টাকা পাঠিয়েছেন,
 সেই নাম্বারের শেষ ৩ সংখ্যা লিখুন।
 """,
-    parse_mode="Markdown"
-)
+        parse_mode="Markdown"
+    )
 
-await state.set_state(
-    DepositState.waiting_sender_info
-)
+    await state.set_state(
+        DepositState.waiting_sender_info
+    )
 
-await callback.answer()
+    await callback.answer()
 
 
 # ==========================================
