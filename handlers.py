@@ -905,8 +905,11 @@ async def save_deposit_reject_reason(
 # ==========================================
 
 @router.message(Command("price"))
-async def price_panel(message: Message):
+async def price_panel(
+        message: Message,
+        state: FSMContext):
 
+    await state.clear()
     if message.from_user.id != ADMIN_ID:
         return
 
