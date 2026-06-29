@@ -169,20 +169,28 @@ def deposit_admin_kb(deposit_id):
 # WEBSITE KEYBOARD
 # =========================
 
-website_kb = ReplyKeyboardMarkup(
-    keyboard=[
+website_kb = InlineKeyboardMarkup(
+    inline_keyboard=[
         [
-            KeyboardButton(text="🌐 Offer Topup")
+            InlineKeyboardButton(
+                text="🌐 Offer Topup",
+                url="https://offertopup.com/topup/1/null"
+            )
         ],
         [
-            KeyboardButton(text="🌐 Topup Hunter")
+            InlineKeyboardButton(
+                text="🌐 Topup Hunter",
+                url="https://topuphunt.com/topup/1/null"
+            )
         ],
         [
-            KeyboardButton(text="🌐 Classic Papa")
+            InlineKeyboardButton(
+                text="🌐 Classic Papa",
+                url="https://topuppapa.com"
+            )
         ]
-    ],
-    resize_keyboard=True
-    )
+    ]
+)
 # =========================
 # ADMIN ORDER BUTTONS
 # =========================
