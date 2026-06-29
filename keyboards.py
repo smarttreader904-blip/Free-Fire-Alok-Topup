@@ -327,9 +327,9 @@ price_change_kb = InlineKeyboardMarkup(
                 callback_data="price_Weekly"
             ),
             InlineKeyboardButton(
-                text="🗓 মান্থলি"
-                callback_data="price_Monthly"
-            )
+    text="🗓 মান্থলি",
+    callback_data="price_Monthly"
+)
         ]
     ]
 )
@@ -342,9 +342,9 @@ def buy_offer_kb(offer_name):
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="🛒 অফার কিনুন"
-                    callback_data=f"buy_{offer_name}"
-                )
+    text="🛒 অফার কিনুন",
+    callback_data=f"buy_{offer_name}"
+)
             ],
             [
                 InlineKeyboardButton(
