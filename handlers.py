@@ -61,7 +61,7 @@ class DepositState(StatesGroup):
     waiting_amount = State()
     waiting_trx_id = State()
 
-class BuyState(from):
+class BuyState(StatesGroup):
     waiting_game_name = State()
     waiting_uid = State()
     waiting_level = State()
