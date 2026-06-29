@@ -1407,6 +1407,16 @@ async def set_money_cmd(
     await state.clear()
 
     if message.from_user.id != ADMIN_ID:
+        await message.answer(
+            """
+🚫 <b>Admin Only Command</b>
+
+❌ এই কমান্ড শুধুমাত্র <b>Bot Admin</b> ব্যবহার করতে পারবেন।
+
+👑 আপনার কাছে প্রয়োজনীয় অনুমতি নেই।
+""",
+            parse_mode="HTML"
+        )
         return
 
     await message.answer(
@@ -1416,11 +1426,6 @@ async def set_money_cmd(
     await state.set_state(
         SetMoneyState.waiting_user_id
     )
-
-
-@router.message(
-    SetMoneyState.waiting_user_id
-)
 async def get_user_id(
         message: Message,
         state: FSMContext):
