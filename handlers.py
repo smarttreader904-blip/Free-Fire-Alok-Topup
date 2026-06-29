@@ -1452,25 +1452,14 @@ async def any_command(
         message: Message,
         state: FSMContext):
 
-    await state.clear()            
-# ==========================================
-# UNKNOWN TEXT HANDLER
-# ==========================================
-
-@router.message()
-async def unknown_message(
-        message: Message):
-
-    await message.answer(
-        """
-❌ এই অপশনটি সঠিক নয়।
-
-দয়া করে /start চাপুন অথবা মেনু থেকে একটি অপশন নির্বাচন করুন।
-""",
-        reply_markup=start_kb
+    await state.clear()    
+reply_markup=start_kb
             )
 @router.message(Command("Website"))
 async def website_cmd(message: Message):
+
+    if message.from_user.id != ADMIN_ID:
+        return
 
     await message.answer(
         """
@@ -1479,7 +1468,7 @@ async def website_cmd(message: Message):
 নিচের একটি Website সিলেক্ট করুন।
 """,
         reply_markup=website_kb
-        )
+    )
 @router.message(F.text == "🌐 Offer Topup")
 async def offer_site(message: Message):
     await message.answer(
@@ -1498,4 +1487,20 @@ async def hunter_site(message: Message):
 async def papa_site(message: Message):
     await message.answer(
         "🌐 Classic Papa Website:\nhttps://topuppapa.com"
-            )    
+)            
+# ==========================================
+# UNKNOWN TEXT HANDLER
+# ==========================================
+
+@router.message()
+async def unknown_message(
+        message: Message):
+
+    await message.answer(
+        """
+❌ এই অপশনটি সঠিক নয়।
+
+দয়া করে /start চাপুন অথবা মেনু থেকে একটি অপশন নির্বাচন করুন।
+""",
+
+        
