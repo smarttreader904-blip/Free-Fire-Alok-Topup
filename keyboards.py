@@ -165,7 +165,24 @@ def deposit_admin_kb(deposit_id):
         ]
     )
 
+# =========================
+# WEBSITE KEYBOARD
+# =========================
 
+website_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="🌐 Offer Topup")
+        ],
+        [
+            KeyboardButton(text="🌐 Topup Hunter")
+        ],
+        [
+            KeyboardButton(text="🌐 Classic Papa")
+        ]
+    ],
+    resize_keyboard=True
+    )
 # =========================
 # ADMIN ORDER BUTTONS
 # =========================
@@ -332,34 +349,4 @@ def buy_offer_kb(offer_name):
                 )
             ]
         ]
-)
-# =========================
-# WEBSITE MENU
-# =========================
-
-website_kb = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(
-                text="🌟 Offer Topup",
-                web_app=None
-            )
-        ],
-        [
-            KeyboardButton(
-                text="🔥 TopupHunter"
-            )
-        ],
-        [
-            KeyboardButton(
-                text="👑 Classic Papa"
-            )
-        ],
-        [
-            KeyboardButton(
-                text="🏠 Main Menu"
-            )
-        ]
-    ],
-    resize_keyboard=True
 )
