@@ -173,19 +173,19 @@ website_kb = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             InlineKeyboardButton(
-                text="🌐 Offer Topup",
+                text="🌍 Offer Topup",
                 url="https://offertopup.com/topup/1/null"
             )
         ],
         [
             InlineKeyboardButton(
-                text="🌐 Topup Hunter",
+                text="🛍️ Topup Hunter",
                 url="https://topuphunt.com/topup/1/null"
             )
         ],
         [
             InlineKeyboardButton(
-                text="🌐 Classic Papa",
+                text="🏆 Classic Papa",
                 url="https://topuppapa.com"
             )
         ]
