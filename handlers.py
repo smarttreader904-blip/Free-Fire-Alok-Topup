@@ -1453,8 +1453,6 @@ async def any_command(
         state: FSMContext):
 
     await state.clear()    
-reply_markup=start_kb
-            )
 @router.message(Command("Website"))
 async def website_cmd(message: Message):
 
