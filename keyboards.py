@@ -333,3 +333,33 @@ def buy_offer_kb(offer_name):
             ]
         ]
 )
+# =========================
+# WEBSITE MENU
+# =========================
+
+website_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(
+                text="🌟 Offer Topup",
+                web_app=None
+            )
+        ],
+        [
+            KeyboardButton(
+                text="🔥 TopupHunter"
+            )
+        ],
+        [
+            KeyboardButton(
+                text="👑 Classic Papa"
+            )
+        ],
+        [
+            KeyboardButton(
+                text="🏠 Main Menu"
+            )
+        ]
+    ],
+    resize_keyboard=True
+)
