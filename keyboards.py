@@ -70,75 +70,75 @@ offer_kb = InlineKeyboardMarkup(
         ],
         [
             InlineKeyboardButton(
-                text="25 Diamond",
+                text="25 ডায়মন্ডDi",
                 callback_data="offer_25 Diamond"
             ),
             InlineKeyboardButton(
-                text="50 Diamond",
+                text="50 ডায়মন্ড",
                 callback_data="offer_50 Diamond"
             ),
             InlineKeyboardButton(
-                text="115 Diamond",
+                text="115 ডায়মন্ড",
                 callback_data="offer_115 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
-                text="240 Diamond",
+                text="240 ডায়মন্ড",
                 callback_data="offer_240 Diamond"
             ),
             InlineKeyboardButton(
-                text="355 Diamond",
+                text="355 ডায়মন্ড",
                 callback_data="offer_355 Diamond"
             ),
             InlineKeyboardButton(
-                text="480 Diamond",
+                text="480 ডায়মন্ড",
                 callback_data="offer_480 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
-                text="505 Diamond",
+                text="505 ডায়মন্ড",
                 callback_data="offer_505 Diamond"
             ),
             InlineKeyboardButton(
-                text="610 Diamond",
+                text="610 ডায়মন্ড",
                 callback_data="offer_610 Diamond"
             ),
             InlineKeyboardButton(
-                text="850 Diamond",
+                text="850 ডায়মন্ড",
                 callback_data="offer_850 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
-                text="1090 Diamond",
+                text="1090 ডায়মন্ড",
                 callback_data="offer_1090 Diamond"
             ),
             InlineKeyboardButton(
-                text="1240 Diamond",
+                text="1240 ডায়মন্ড",
                 callback_data="offer_1240 Diamond"
             ),
             InlineKeyboardButton(
-                text="2530 Diamond",
+                text="2530 ডায়মন্ড",
                 callback_data="offer_2530 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
-                text="5060 Diamond",
+                text="5060 ডায়মন্ড",
                 callback_data="offer_5060 Diamond"
             ),
             InlineKeyboardButton(
-                text="7590 Diamond",
+                text="7590 ডায়মন্ড",
                 callback_data="offer_7590 Diamond"
             ),
             InlineKeyboardButton(
-                text="10120 Diamond",
+                text="10120 ডায়মন্ড",
                 callback_data="offer_10120 Diamond"
             )
         ]
