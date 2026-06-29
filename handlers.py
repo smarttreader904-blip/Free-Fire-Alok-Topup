@@ -1493,8 +1493,7 @@ async def papa_site(message: Message):
 # ==========================================
 
 @router.message()
-async def unknown_message(
-        message: Message):
+async def unknown_message(message: Message):
 
     await message.answer(
         """
@@ -1502,5 +1501,6 @@ async def unknown_message(
 
 দয়া করে /start চাপুন অথবা মেনু থেকে একটি অপশন নির্বাচন করুন।
 """,
-
+        reply_markup=start_kb
+    )
         
