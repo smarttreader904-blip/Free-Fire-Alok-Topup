@@ -60,15 +60,14 @@ offer_kb = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             InlineKeyboardButton(
-                text="📅 WEEKLY",
+                text="📅 উইকলি",
                 callback_data="offer_Weekly"
             ),
             InlineKeyboardButton(
-                text="🗓 MONTHLY",
+                text="🗓 মান্থলি",
                 callback_data="offer_Monthly"
             )
         ],
-
         [
             InlineKeyboardButton(
                 text="25 Diamond",
