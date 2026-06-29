@@ -1091,6 +1091,16 @@ async def broadcast_message(
         message: Message):
 
     if message.from_user.id != ADMIN_ID:
+        await message.answer(
+            """
+🚫 <b>Admin Only Command</b>
+
+❌ এই কমান্ড শুধুমাত্র <b>Bot Admin</b> ব্যবহার করতে পারবেন।
+
+👑 আপনার কাছে প্রয়োজনীয় অনুমতি নেই।
+""",
+            parse_mode="HTML"
+        )
         return
 
     text = message.text.replace(
@@ -1116,6 +1126,7 @@ async def broadcast_message(
 
     await message.answer(
         f"✅ Message Sent To {success} Users"
+    )
     )# ==========================================
 # ADMIN NOTIFICATION FUNCTIONS
 # ==========================================
