@@ -45,7 +45,8 @@ from keyboards import (
     order_admin_kb,
     price_admin_kb,
     price_change_kb,
-    deposit_admin_kb
+    deposit_admin_kb,
+    website_kb
 )
 
 router = Router()
@@ -60,7 +61,7 @@ class DepositState(StatesGroup):
     waiting_amount = State()
     waiting_trx_id = State()
 
-class BuyState(StatesGroup):
+class BuyState(from):
     waiting_game_name = State()
     waiting_uid = State()
     waiting_level = State()
