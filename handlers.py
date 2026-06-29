@@ -1447,12 +1447,7 @@ async def add_money_to_user(
         pass
 
     await state.clear()
-@router.message(F.text.startswith("/"))
-async def any_command(
-        message: Message,
-        state: FSMContext):
 
-    await state.clear()    
 @router.message(Command("website"))
 async def website_cmd(message: Message):
 
