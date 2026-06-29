@@ -1453,7 +1453,7 @@ async def any_command(
         state: FSMContext):
 
     await state.clear()    
-@router.message(Command("Website"))
+@router.message(Command("website"))
 async def website_cmd(message: Message):
 
     if message.from_user.id != ADMIN_ID:
