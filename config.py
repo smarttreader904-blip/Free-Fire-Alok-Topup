@@ -1,11 +1,12 @@
 # config.py
 
+import os
+
 # =========================
 # BOT CONFIGURATION
 # =========================
 
-# তোমার Bot Token এখানে বসাবে
-BOT_TOKEN = "8143880628:AAEEyhz460ujNZSnHBmjd9RB15zf0n6Lt-U"
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # Admin Telegram ID
 ADMIN_ID = 8385436442
@@ -23,8 +24,9 @@ BINANCE_ID = "123456789"
 # =========================
 
 BONUS_AMOUNT = 1
-BONUS_COOLDOWN = 86400  # 24 Hours (seconds)
+BONUS_COOLDOWN = 86400
 REFERRAL_BONUS = 5
+
 # =========================
 # DEFAULT DIAMOND PRICES
 # =========================
