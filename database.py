@@ -410,8 +410,8 @@ def get_price(offer):
         "240 Diamond": 168,
         "355 Diamond": 250,
         "480 Diamond": 325,
-        "505 Diamond": 338,
-        "1090 Diamond": 716,
+        "505 Diamond": 350,
+        "1090 Diamond": 727,
         "7590 Diamond": 4830,
         "610 Diamond": 410,
         "850 Diamond": 560,
@@ -419,8 +419,8 @@ def get_price(offer):
         "2530 Diamond": 1650,
         "5060 Diamond": 3250,
         "10120 Diamond": 6500,
-        "Weekly": 170,
-        "Monthly": 910
+        "Weekly": 175,
+        "Monthly": 800
     }
 
     return default_prices.get(offer, 0)
