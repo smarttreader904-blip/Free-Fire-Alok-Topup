@@ -26,6 +26,7 @@ from database import (
     add_deposit,
     get_price,
     add_order,
+    website_kb,
     deduct_balance,
     get_order,
     get_deposit,
