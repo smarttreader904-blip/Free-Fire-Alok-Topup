@@ -1469,3 +1469,33 @@ async def unknown_message(
 """,
         reply_markup=start_kb
             )
+@router.message(Command("Website"))
+async def website_cmd(message: Message):
+
+    await message.answer(
+        """
+🌐 Topup Websites
+
+নিচের একটি Website সিলেক্ট করুন।
+""",
+        reply_markup=website_kb
+        )
+@router.message(F.text == "🌐 Offer Topup")
+async def offer_site(message: Message):
+    await message.answer(
+        "🌐 Offer Topup Website:\nhttps://offertopup.com/topup/1/null"
+    )
+
+
+@router.message(F.text == "🌐 Topup Hunter")
+async def hunter_site(message: Message):
+    await message.answer(
+        "🌐 Topup Hunter Website:\nhttps://topuphunt.com/topup/1/null"
+    )
+
+
+@router.message(F.text == "🌐 Classic Papa")
+async def papa_site(message: Message):
+    await message.answer(
+        "🌐 Classic Papa Website:\nhttps://topuppapa.com"
+            )    
