@@ -248,82 +248,82 @@ price_change_kb = InlineKeyboardMarkup(
     inline_keyboard=[
         [
             InlineKeyboardButton(
-                text="25 Diamond",
+                text="25 ডায়মন্ড",
                 callback_data="price_25 Diamond"
             ),
             InlineKeyboardButton(
-                text="50 Diamond",
+                text="50 ডায়মন্ড",
                 callback_data="price_50 Diamond"
             ),
             InlineKeyboardButton(
-                text="115 Diamond",
+                text="115 ডায়মন্ড",
                 callback_data="price_115 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
-                text="240 Diamond",
+                text="240 ডায়মন্ড",
                 callback_data="price_240 Diamond"
             ),
             InlineKeyboardButton(
-                text="355 Diamond",
+                text="355 ডায়মন্ড",
                 callback_data="price_355 Diamond"
             ),
             InlineKeyboardButton(
-                text="480 Diamond",
+                text="480 ডায়মন্ড",
                 callback_data="price_480 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
-                text="505 Diamond",
+                text="505 ডায়মন্ড",
                 callback_data="price_505 Diamond"
             ),
             InlineKeyboardButton(
-                text="610 Diamond",
+                text="610 ডায়মন্ড",
                 callback_data="price_610 Diamond"
             ),
             InlineKeyboardButton(
-                text="850 Diamond",
+                text="850 ডায়মন্ড",
                 callback_data="price_850 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
-                text="1090 Diamond",
+                text="1090 ডায়মন্ড",
                 callback_data="price_1090 Diamond"
             ),
             InlineKeyboardButton(
-                text="1240 Diamond",
+                text="1240 ডায়মন্ড",
                 callback_data="price_1240 Diamond"
             ),
             InlineKeyboardButton(
-                text="2530 Diamond",
+                text="2530 ডায়মন্ড",
                 callback_data="price_2530 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
-                text="5060 Diamond",
+                text="5060 ডায়মন্ড",
                 callback_data="price_5060 Diamond"
             ),
             InlineKeyboardButton(
-                text="7590 Diamond",
+                text="7590 ডায়মন্ড",
                 callback_data="price_7590 Diamond"
             ),
             InlineKeyboardButton(
-                text="10120 Diamond",
+                text="10120 ডায়মন্ড",
                 callback_data="price_10120 Diamond"
             )
         ],
 
         [
             InlineKeyboardButton(
-                text="📅 উইকলি"
+                text="📅 উইকলি",
                 callback_data="price_Weekly"
             ),
             InlineKeyboardButton(
