@@ -1249,7 +1249,18 @@ async def user_data_command(
         state: FSMContext):
 
     await state.clear()
+
     if message.from_user.id != ADMIN_ID:
+        await message.answer(
+            """
+🚫 <b>Admin Only Command</b>
+
+❌ এই কমান্ড শুধুমাত্র <b>Bot Admin</b> ব্যবহার করতে পারবেন।
+
+👑 আপনার কাছে প্রয়োজনীয় অনুমতি নেই।
+""",
+            parse_mode="HTML"
+        )
         return
 
     users = get_users_full_data()
@@ -1267,7 +1278,6 @@ async def user_data_command(
 
         try:
             chat = await message.bot.get_chat(user_id)
-
             name = chat.full_name
 
         except:
