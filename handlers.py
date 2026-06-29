@@ -1452,17 +1452,22 @@ async def add_money_to_user(
 async def website_cmd(message: Message):
 
     if message.from_user.id != ADMIN_ID:
+        await message.answer(
+            "❌ এই কমান্ড শুধুমাত্র Admin ব্যবহার করতে পারবেন।"
+        )
         return
 
     await message.answer(
         """
-🌐 Topup Websites
+🌐 <b>Topup Websites</b>
 
 নিচের একটি Website সিলেক্ট করুন।
-""",
-        reply_markup=website_kb
-    )
 
+👇 নিচের Button এ ক্লিক করুন
+""",
+        reply_markup=website_kb,
+        parse_mode="HTML"
+    )
 # ==========================================
 # UNKNOWN TEXT HANDLER
 # ==========================================
