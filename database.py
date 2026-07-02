@@ -109,6 +109,18 @@ def init_db():
 
     )
     """)
+    # SAVED UID TABLE
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS saved_uid (
+
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+        uid TEXT,
+
+        game_name TEXT
+
+    )
+    """)
 
     conn.commit()
 
@@ -569,6 +581,46 @@ def get_users_full_data():
         SELECT user_id, balance
         FROM users
     """)
+
+    data = cur.fetchall()
+
+    conn.close()
+
+    return data
+# ==========================================
+# SAVED UID FUNCTIONS
+# ==========================================
+
+def add_saved_uid(uid, game_name):
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        INSERT INTO saved_uid
+        (uid, game_name)
+
+        VALUES (?, ?)
+        """,
+        (uid, game_name)
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def get_saved_uid():
+
+    conn = connect()
+    cur = conn.cursor()
+
+    cur.execute(
+        """
+        SELECT uid, game_name
+        FROM saved_uid
+        """
+    )
 
     data = cur.fetchall()
 
