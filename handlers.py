@@ -44,6 +44,7 @@ from keyboards import (
     payment_kb,
     offer_kb,
     buy_offer_kb,
+uid_memory_kb,
     order_admin_kb,
     price_admin_kb,
     price_change_kb,
