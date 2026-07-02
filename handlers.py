@@ -1437,6 +1437,7 @@ async def set_money_cmd(
     await state.set_state(
         SetMoneyState.waiting_user_id
     )
+@router.message(SetMoneyState.waiting_user_id)
 async def get_user_id(
         message: Message,
         state: FSMContext):
