@@ -191,6 +191,24 @@ website_kb = InlineKeyboardMarkup(
     ]
 )
 # =========================
+# UID MEMORY PANEL
+# =========================
+
+uid_memory_kb = InlineKeyboardMarkup(
+    inline_keyboard=[
+        [
+            InlineKeyboardButton(
+                text="➕ Add New",
+                callback_data="uid_add"
+            ),
+            InlineKeyboardButton(
+                text="📋 Show IDs",
+                callback_data="uid_show"
+            )
+        ]
+    ]
+)
+# =========================
 # ADMIN ORDER BUTTONS
 # =========================
 
