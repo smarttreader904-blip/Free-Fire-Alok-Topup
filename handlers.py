@@ -1513,6 +1513,104 @@ async def website_cmd(message: Message):
         reply_markup=website_kb,
         parse_mode="HTML"
     )
+    @router.message(Command("uid"))
+async def uid_panel(message: Message):
+
+    if message.from_user.id != ADMIN_ID:
+        await message.answer(
+            "❌ এই কমান্ড শুধুমাত্র Admin ব্যবহার করতে পারবেন।"
+        )
+        return
+
+    await message.answer(
+        """
+🗂 <b>UID Memory Panel</b>
+
+নিচের একটি অপশন নির্বাচন করুন।
+""",
+        reply_markup=uid_memory_kb,
+        parse_mode="HTML"
+            )
+    @router.callback_query(F.data == "uid_add")
+async def uid_add(callback: CallbackQuery, state: FSMContext):
+
+    await callback.message.answer(
+        "🆔 যে UID মেমোরিতে সংরক্ষণ করবেন তা লিখুন:"
+    )
+
+    await state.set_state(
+        UIDState.waiting_uid
+    )
+
+    await callback.answer()
+    @router.message(UIDState.waiting_uid)
+async def receive_uid(message: Message, state: FSMContext):
+
+    await state.update_data(
+        uid=message.text
+    )
+
+    await message.answer(
+        "🎮 এখন Game Name লিখুন:"
+    )
+
+    await state.set_state(
+        UIDState.waiting_name
+    )
+    @router.message(UIDState.waiting_name)
+async def save_uid(message: Message, state: FSMContext):
+
+    data = await state.get_data()
+
+    uid = data["uid"]
+
+    add_saved_uid(
+        uid,
+        message.text
+    )
+
+    await message.answer(
+        f"""
+✅ <b>UID সফলভাবে সংরক্ষণ করা হয়েছে!</b>
+
+━━━━━━━━━━━━━━
+🎮 <b>Game Name:</b> {message.text}
+🆔 <code>{uid}</code>
+━━━━━━━━━━━━━━
+
+📦 UID Memory-তে সফলভাবে যুক্ত হয়েছে।
+""",
+        parse_mode="HTML"
+    )
+
+    await state.clear()
+@router.callback_query(F.data == "uid_show")
+async def show_uid(callback: CallbackQuery):
+
+    data = get_saved_uid()
+
+    if not data:
+        await callback.message.answer(
+            "❌ কোনো UID সংরক্ষিত নেই।"
+        )
+        await callback.answer()
+        return
+
+    text = "🗂 <b>Saved UID List</b>\n\n"
+
+    for uid, name in data:
+        text += (
+            f"🎮 <b>{name}</b>\n"
+            f"🆔 <code>{uid}</code>\n"
+            f"━━━━━━━━━━━━━━\n"
+        )
+
+    await callback.message.answer(
+        text,
+        parse_mode="HTML"
+    )
+
+    await callback.answer()    
 # ==========================================
 # UNKNOWN TEXT HANDLER
 # ==========================================
