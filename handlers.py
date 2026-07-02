@@ -1516,7 +1516,11 @@ async def website_cmd(message: Message):
         reply_markup=website_kb,
         parse_mode="HTML"
     )
-    @router.message(Command("uid"))
+    # ==========================================
+# UID MEMORY PANEL
+# ==========================================
+
+@router.message(Command("uid"))
 async def uid_panel(message: Message):
 
     if message.from_user.id != ADMIN_ID:
@@ -1533,20 +1537,22 @@ async def uid_panel(message: Message):
 """,
         reply_markup=uid_memory_kb,
         parse_mode="HTML"
-            )
-    @router.callback_query(F.data == "uid_add")
+    )
+
+
+@router.callback_query(F.data == "uid_add")
 async def uid_add(callback: CallbackQuery, state: FSMContext):
 
     await callback.message.answer(
-        "🆔 যে UID মেমোরিতে সংরক্ষণ করবেন তা লিখুন:"
+        "🆔 যে UID Memory-তে Save করবেন সেটি লিখুন:"
     )
 
-    await state.set_state(
-        UIDState.waiting_uid
-    )
+    await state.set_state(UIDState.waiting_uid)
 
     await callback.answer()
-    @router.message(UIDState.waiting_uid)
+
+
+@router.message(UIDState.waiting_uid)
 async def receive_uid(message: Message, state: FSMContext):
 
     await state.update_data(
@@ -1557,36 +1563,34 @@ async def receive_uid(message: Message, state: FSMContext):
         "🎮 এখন Game Name লিখুন:"
     )
 
-    await state.set_state(
-        UIDState.waiting_name
-    )
-    @router.message(UIDState.waiting_name)
+    await state.set_state(UIDState.waiting_name)
+
+
+@router.message(UIDState.waiting_name)
 async def save_uid(message: Message, state: FSMContext):
 
     data = await state.get_data()
 
     uid = data["uid"]
+    game_name = message.text
 
-    add_saved_uid(
-        uid,
-        message.text
-    )
+    add_saved_uid(uid, game_name)
 
     await message.answer(
         f"""
-✅ <b>UID সফলভাবে সংরক্ষণ করা হয়েছে!</b>
+✅ <b>UID সফলভাবে Save হয়েছে!</b>
 
 ━━━━━━━━━━━━━━
-🎮 <b>Game Name:</b> {message.text}
+🎮 <b>Game:</b> {game_name}
 🆔 <code>{uid}</code>
 ━━━━━━━━━━━━━━
-
-📦 UID Memory-তে সফলভাবে যুক্ত হয়েছে।
 """,
         parse_mode="HTML"
     )
 
     await state.clear()
+
+
 @router.callback_query(F.data == "uid_show")
 async def show_uid(callback: CallbackQuery):
 
@@ -1594,16 +1598,16 @@ async def show_uid(callback: CallbackQuery):
 
     if not data:
         await callback.message.answer(
-            "❌ কোনো UID সংরক্ষিত নেই।"
+            "❌ কোনো UID Save করা নেই।"
         )
         await callback.answer()
         return
 
     text = "🗂 <b>Saved UID List</b>\n\n"
 
-    for uid, name in data:
+    for uid, game_name in data:
         text += (
-            f"🎮 <b>{name}</b>\n"
+            f"🎮 <b>{game_name}</b>\n"
             f"🆔 <code>{uid}</code>\n"
             f"━━━━━━━━━━━━━━\n"
         )
@@ -1613,7 +1617,7 @@ async def show_uid(callback: CallbackQuery):
         parse_mode="HTML"
     )
 
-    await callback.answer()    
+    await callback.answer()
 # ==========================================
 # UNKNOWN TEXT HANDLER
 # ==========================================
