@@ -76,14 +76,17 @@ class PriceState(StatesGroup):
 
 class PaymentState(StatesGroup):
     waiting_new_payment = State()
-    
+
+
 class SetMoneyState(StatesGroup):
     waiting_user_id = State()
     waiting_amount = State()
-    
-    class UIDState(StatesGroup):
+
+
+class UIDState(StatesGroup):
     waiting_uid = State()
     waiting_name = State()
+
 
 class RejectOrderState(StatesGroup):
     waiting_reason = State()
